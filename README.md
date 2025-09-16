@@ -1,7 +1,7 @@
 # Projeto-PWM
 Projeto 1° GQ da cadeira Web e Mobile
-Integrantes:
-  Marina Durant
-  Nunno Wakiyama
-  Pablo Felipe
-  Pedro Alves
+# Integrantes:
+  <p>Marina durant<p/>
+  <p>Nunno Wakiyama<p/>
+  <p>Pablo Felipe<p/>
+  <p>Pedro Alves<p/>
