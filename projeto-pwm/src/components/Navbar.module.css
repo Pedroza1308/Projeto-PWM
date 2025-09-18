@@ -1,9 +1,13 @@
 
 
 .navbar {
-    background-color: var(--bg-color);
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
+    width: 100%;
+    padding: 1rem 2rem; 
+    background-color: rgba(26, 26, 46, 0.5);
+    backdrop-filter: blur(10px); /* efeito de vidro fosco */
+    border-bottom: 1px solid rgba(154, 136, 196, 0.2); 
+    
+    /*navbar fixa no topo */
     position: sticky;
     top: 0;
     z-index: 1000;

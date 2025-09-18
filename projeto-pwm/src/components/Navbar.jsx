@@ -15,34 +15,26 @@ const Navbar = () => {
        
         <Link href="/" className={styles.logo}>
           <Image
-            
-           
             src="/assets/logo-ecos.png" 
-            
+            alt="Logo Ecos"
             width={90}
             height={36}
             priority
           />
         </Link>
         
-        <nav className={styles.navLinks}>
+         <nav className={styles.navLinks}>
           <ul>
-            <li>
-              <Link href="/">Início</Link>
-            </li>
-            <li>
-              <Link href="/conceito">Conceito</Link>
-            </li>
-            <li>
-              <Link href="/playlists">Playlists</Link>
-            </li>
+            <li><Link href="/">Início</Link></li>
+            <li><Link href="/conceito">Conceito</Link></li>
+            <li><Link href="/playlists">Playlists</Link></li>
           </ul>
         </nav>
         
         <Link href="/signup" className={styles.ctaButton}>
           Comece a Ouvir
         </Link>
-
+        
       </div>
     </header>
   );
