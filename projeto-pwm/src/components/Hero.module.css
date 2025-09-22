@@ -1,0 +1,74 @@
+
+.heroContainer {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    position: relative; 
+}
+
+.heroLeft {
+    width: 50%;
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand {
+    font-family: var(--font-montserrat);
+    font-size: clamp(4rem, 15vw, 10rem);
+    font-weight: 900;
+    color: #3B3B98;
+    letter-spacing: -5px;
+}
+
+.heroRight {
+    width: 50%;
+    background-color: #3B3B98;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.heroContent h1 {
+    font-family: var(--font-montserrat);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+.ctaButton {
+    background-color: white;
+    color: #3B3B98;
+    padding: 12px 35px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+}
+
+.cornerIcon {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-montserrat);
+    font-weight: 700;
+}
