@@ -8,7 +8,7 @@ const SPOTIFY_CLIENT_ID = 'db7158a2109340699ca7e6944c80d8c3';
 const SPOTIFY_CLIENT_SECRET = 'bb5097db4e8d4c178c2845c7be074229';
 
 function PlaylistManager() {
-    // ---------------- Estados do Componente ----------------
+    
     const [playlists, setPlaylists] = useState([]);
     const [playlistName, setPlaylistName] = useState('');
     const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ function PlaylistManager() {
     
     const [editingSong, setEditingSong] = useState(null);
 
-    // ---------------- Autenticação com a API do Spotify ----------------
+    //  Autenticação com a API do Spotify 
     const getSpotifyToken = async () => {
         try {
             const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -42,7 +42,7 @@ function PlaylistManager() {
         fetchPlaylists();
     }, []);
 
-    // ---------------- Busca de Músicas no Spotify ----------------
+    // Busca de Músicas no Spotify  com api
     const handleSearchSpotify = async (e) => {
         e.preventDefault();
         if (!searchTerm) return;
@@ -63,7 +63,7 @@ function PlaylistManager() {
         }
     };
 
-    // ---------------- Operação C (Create - Criar) ----------------
+    // Operação C (Criar)
     const handleCreatePlaylist = async (e) => {
         e.preventDefault();
         if (!playlistName) {
@@ -90,7 +90,7 @@ function PlaylistManager() {
         }
     };
 
-    // ---------------- Operação R (Read - Ler) ----------------
+    //  Operação R (Ler) 
     const fetchPlaylists = async () => {
         setLoading(true);
         const Playlist = Parse.Object.extend('Playlist');
@@ -112,7 +112,7 @@ function PlaylistManager() {
         }
     };
 
-    // ---------------- Operação U (Update - Atualizar) ----------------
+    //  Operação U (Atualizar)
     const handleAddSong = async (playlistId, song) => {
         setLoading(true);
         
@@ -133,9 +133,9 @@ function PlaylistManager() {
             console.log('Música adicionada com sucesso!');
             fetchPlaylists();
             
-            // -------- AQUI É ONDE ESTÁ A ALTERAÇÃO --------
-            setSearchResults([]); // Limpa os resultados da busca
-            setSearchTerm(''); // Limpa o termo de busca também, para ficar mais limpo
+            
+            setSearchResults([]); 
+            setSearchTerm(''); 
             
         } catch (error) {
             console.error('Erro ao adicionar a música:', error);
@@ -170,7 +170,7 @@ function PlaylistManager() {
         }
     };
 
-    // ---------------- Operação D (Delete - Deletar) ----------------
+    //  Operação D (Deletar)
     const handleDeletePlaylist = async (playlistId) => {
         if (!window.confirm("Tem certeza que quer deletar esta playlist?")) return;
         setLoading(true);
@@ -215,7 +215,7 @@ function PlaylistManager() {
         }
     };
 
-    // ---------------- Renderização da UI ----------------
+    //  Renderização da UI
     return (
         <div className="container mx-auto p-4 md:p-8">
             <h1 className="text-3xl font-bold text-gray-800 mb-6">Minhas Playlists de Música</h1>
