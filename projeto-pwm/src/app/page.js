@@ -23,7 +23,6 @@ export default function Home() {
         <PlaylistManager />
       </section>
       
-      <p className="text-center p-8">Sejam bem vindos ao nosso site</p>
     </>
   );
 }
