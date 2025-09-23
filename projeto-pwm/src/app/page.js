@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import PlaylistManager from "../components/PlaylistManager"; 
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -22,6 +23,8 @@ export default function Home() {
       <section id="criar">
         <PlaylistManager />
       </section>
+      
+      <Footer/>
       
     </>
   );

@@ -1,0 +1,167 @@
+.footer {
+  background-color: #121212;
+  color: white;
+  margin-top: 4rem;
+  padding: 3rem 0 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+/* Seção da marca */
+.brandSection {
+  max-width: 300px;
+}
+
+.logo {
+  font-family: var(--font-montserrat);
+  font-size: 2rem;
+  font-weight: 900;
+  color: #3B3B98;
+  text-decoration: none;
+  letter-spacing: -2px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  color: #3B3B98;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.description {
+  color: #cccccc;
+  line-height: 1.6;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Seções de links */
+.linksSection h4 {
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.linksSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linksSection li {
+  margin-bottom: 0.5rem;
+}
+
+.linksSection a {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.linksSection a:hover {
+  color: #3B3B98;
+}
+
+/* Seção social */
+.socialSection h4 {
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialLinks a {
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.socialLinks a:hover {
+  transform: scale(1.2);
+}
+
+/* Divider */
+.divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #3B3B98, transparent);
+  margin: 2rem 0;
+}
+
+/* Copyright */
+.copyright {
+  text-align: center;
+  padding: 1rem 0;
+  color: #999999;
+}
+
+.copyright p {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+}
+
+.madeWith {
+  color: #3B3B98;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .brandSection {
+    max-width: 100%;
+  }
+  
+  .socialLinks {
+    justify-content: center;
+  }
+  
+  .footer {
+    padding: 2rem 0 1rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .footerContent {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .socialSection {
+    grid-column: span 3;
+    text-align: center;
+  }
+}
