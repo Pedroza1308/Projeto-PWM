@@ -5,14 +5,6 @@ import Link from 'next/link';
 import styles from './Footer.module.css';
 
 const Footer = () => {
-  const scrollToPlaylist = () => {
-    const playlistSection = document.querySelector('[id="playlist"]') || 
-                           document.querySelector('.container.mx-auto.p-4');
-    if (playlistSection) {
-      playlistSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -33,9 +25,10 @@ const Footer = () => {
           <div className={styles.linksSection}>
             <h4>Navegação</h4>
             <ul>
-              <li><Link href="/">Home</Link></li>
-              <li><button onClick={scrollToPlaylist} className={styles.linkButton}>Minhas Playlists</button></li>
-              <li><Link href="/subscribe">Subscribe</Link></li>
+              <li><a href="#inicio">Home</a></li>
+              <li><a href="#about">Sobre</a></li>
+              <li><a href="#criar">Minhas Playlists</a></li>
+              
             </ul>
           </div>
 
