@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Parse from '../utils/parseConfig';
 
-// Insira suas credenciais do Spotify aqui
-const SPOTIFY_CLIENT_ID = 'SEU_CLIENT_ID';
-const SPOTIFY_CLIENT_SECRET = 'SEU_CLIENT_SECRET';
+
+const SPOTIFY_CLIENT_ID =  '569322c64d5d4dd1abb64ab8b88cae3b';
+const SPOTIFY_CLIENT_SECRET =  '280e7af84e564c6c9d8b19f1f8698561';
 
 function PlaylistManager() {
   
