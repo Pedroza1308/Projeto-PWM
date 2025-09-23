@@ -15,7 +15,7 @@ const Hero = () => {
           
         </div>
       </div>
-      <div className={styles.cornerIcon}>N</div>
+      
     </section>
   );
 };
