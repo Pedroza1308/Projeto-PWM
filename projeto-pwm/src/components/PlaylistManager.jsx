@@ -3,12 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import Parse from '../utils/parseConfig';
 
+// Insira suas credenciais do Spotify aqui
+const SPOTIFY_CLIENT_ID = 'SEU_CLIENT_ID';
+const SPOTIFY_CLIENT_SECRET = 'SEU_CLIENT_SECRET';
+
 function PlaylistManager() {
-  // ---------------- Estados do Componente ----------------
+  
   const [playlists, setPlaylists] = useState([]);
   const [playlistName, setPlaylistName] = useState('');
   const [loading, setLoading] = useState(false);
-
+  
   
   const [newSong, setNewSong] = useState({
     nome_musica: '',
@@ -17,7 +21,57 @@ function PlaylistManager() {
     album: ''
   });
 
-  // ---------------- Operação R (Read - Ler) ----------------
+  
+  const [spotifyToken, setSpotifyToken] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [searching, setSearching] = useState(false);
+
+  
+
+  
+  const getSpotifyToken = async () => {
+    try {
+      const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + btoa(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_CLIENT_SECRET)
+        },
+        body: 'grant_type=client_credentials'
+      });
+      const data = await response.json();
+      setSpotifyToken(data.access_token);
+    } catch (error) {
+      console.error('Erro ao obter o token do Spotify:', error);
+    }
+  };
+
+  // Função para buscar músicas no Spotify
+  const handleSearchSpotify = async (e) => {
+    e.preventDefault();
+    if (!searchTerm) {
+      alert('Por favor, digite algo para buscar.');
+      return;
+    }
+    setSearching(true);
+    try {
+      const response = await fetch(`https://developer.spotify.com/documentation/web-api/tutorials/getting-started2{searchTerm}&type=track&limit=12`, {
+        headers: { 'Authorization': `Bearer ${spotifyToken}` }
+      });
+      const data = await response.json();
+      if (data.tracks) {
+        setSearchResults(data.tracks.items);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar músicas no Spotify:', error);
+    } finally {
+      setSearching(false);
+    }
+  };
+  
+  // ---------------- Operações CRUD (Create, Read, Update, Delete) ----------------
+
   const fetchPlaylists = async () => {
     setLoading(true);
     const Playlist = Parse.Object.extend('Playlist');
@@ -40,10 +94,11 @@ function PlaylistManager() {
   };
 
   useEffect(() => {
+   
     fetchPlaylists();
+    getSpotifyToken();
   }, []);
 
-  // ---------------- Operação C (Create - Criar) ----------------
   const handleCreatePlaylist = async (e) => {
     e.preventDefault();
     if (!playlistName) {
@@ -70,7 +125,6 @@ function PlaylistManager() {
     }
   };
 
-  // ---------------- Operação U (Update - Atualizar) ----------------
   const handleAddSong = async (playlistId) => {
     if (!newSong.nome_musica || !newSong.artista) {
       alert('Nome da música e artista são obrigatórios!');
@@ -82,12 +136,11 @@ function PlaylistManager() {
     if (!playlistToUpdate) return;
     
     try {
-
       playlistToUpdate.parseObject.add('songs', newSong);
       await playlistToUpdate.parseObject.save();
       
       console.log('Música adicionada com sucesso!');
-      setNewSong({ nome_musica: '', artista: '', duracao: '', album: '' }); // Limpa os campos
+      setNewSong({ nome_musica: '', artista: '', duracao: '', album: '' });
       fetchPlaylists();
     } catch (error) {
       console.error('Erro ao adicionar a música:', error);
@@ -96,7 +149,6 @@ function PlaylistManager() {
     }
   };
 
-  // ---------------- Operação D (Delete - Deletar) ----------------
   const handleDeletePlaylist = async (playlistId) => {
     if (!window.confirm("Tem certeza que quer deletar esta playlist?")) return;
     setLoading(true);
@@ -138,6 +190,39 @@ function PlaylistManager() {
         </div>
       </form>
 
+    
+      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+        <h3 className="text-xl font-semibold text-gray-700 mb-4">Verificar Músicas no Spotify</h3>
+        <form onSubmit={handleSearchSpotify} className="flex flex-col md:flex-row gap-4">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Digite o nome da música ou artista"
+            className="flex-grow p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          <button type="submit" disabled={searching} className="bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 transition duration-300 disabled:bg-green-300">
+            {searching ? 'Buscando...' : 'Buscar'}
+          </button>
+        </form>
+        
+        
+        {searchResults.length > 0 && (
+          <div className="mt-6">
+            <h4 className="text-lg font-semibold text-gray-700 mb-2">Resultados da Busca:</h4>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-64 overflow-y-auto">
+              {searchResults.map(track => (
+                <li key={track.id} className="bg-gray-50 p-3 rounded-lg">
+                  <p className="font-bold text-gray-800 truncate">{track.name}</p>
+                  <p className="text-sm text-gray-600 truncate">{track.artists.map(artist => artist.name).join(', ')}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+     
+
       <hr className="my-8" />
       
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Playlists Existentes</h2>
@@ -154,17 +239,17 @@ function PlaylistManager() {
                 
                 
                 <div className="border-t border-gray-200 pt-4 mt-4">
-                  <p className="text-sm font-medium mb-2">Adicionar nova música:</p>
+                  <p className="text-sm font-medium mb-2">Adicionar nova música (manual):</p>
                   <div className="grid grid-cols-1 gap-2 mb-4">
                     <input
                       type="text"
-                      value={newSong.nome_musica}
                       onChange={(e) => setNewSong({...newSong, nome_musica: e.target.value})}
                       placeholder="Nome da Música"
                       disabled={loading}
                       className="p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
-                    <input
+                    
+                     <input
                       type="text"
                       value={newSong.artista}
                       onChange={(e) => setNewSong({...newSong, artista: e.target.value})}
@@ -195,7 +280,7 @@ function PlaylistManager() {
                 </div>
               </div>
 
-            
+              
               <ul className="mt-4">
                 {playlist.songs.length > 0 ? (
                   playlist.songs.map((song, index) => (
