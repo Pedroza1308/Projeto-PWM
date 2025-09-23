@@ -10,8 +10,8 @@ const Navbar = () => {
           ECOS
         </Link>
         <nav className={styles.navLinks}>
-          <Link href="/">exemplo</Link>
-          <Link href="/subscribe">exemplo</Link>
+          <a href="#about">Conheça</a>
+          <a href="#criar">Crie</a>
         </nav>
       </div>
     </header>

@@ -11,10 +11,8 @@ const Hero = () => {
       </div>
       <div className={styles.heroRight}>
         <div className={styles.heroContent}>
-          <h1>GREAT THINGS ARE COMING</h1>
-          <Link href="/#playlist" className={styles.ctaButton}>
-            Learn More
-          </Link>
+          <h1>Onde suas playlists ganham vida.</h1>
+          
         </div>
       </div>
       <div className={styles.cornerIcon}>N</div>
